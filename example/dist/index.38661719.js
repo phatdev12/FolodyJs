@@ -461,16 +461,19 @@ function hmrAcceptRun(bundle, id) {
 },{}],"7BQdY":[function(require,module,exports) {
 const { Render  } = require("../main");
 const App = new Render();
-App.run("main").addElements();
+App.run("main");
+App.addComps();
 console.log("Success");
 
 },{"../main":"h2IDN"}],"h2IDN":[function(require,module,exports) {
+const { Render  } = require('./module/Render/Render.modules');
 module.exports = {
-    Render: require('./module/Render/Render.modules')
+    Render: Render
 };
 
 },{"./module/Render/Render.modules":"9sf0A"}],"9sf0A":[function(require,module,exports) {
-module.exports = class {
+const fs = require("fs");
+module.exports.Render = class Render {
     /**
      * 
      * @param {main} main 
@@ -480,14 +483,23 @@ module.exports = class {
     }
     run(main) {
         // This main to help connect to elements (main)
-        const elements = document.getElementById(main);
-        // Options in this function
-        this.text = elements.innerHTML;
-        this.addElements = ()=>{
-            return console.log(this.text);
-        };
+        try {
+            const elements = document.getElementById(main);
+            if (elements === null) return;
+            // Options in this function
+            this.addComps = (filename)=>{
+                fs.readFile("../components/App.fop", function(error, data) {
+                    elements.innerHTML = data;
+                });
+            };
+        } catch (err) {
+            new TypeError("Folody find null innerText");
+        }
     }
 };
+
+},{"fs":"joWnX"}],"joWnX":[function(require,module,exports) {
+"use strict";
 
 },{}]},["5UGAA","7BQdY"], "7BQdY", "parcelRequired98c")
 

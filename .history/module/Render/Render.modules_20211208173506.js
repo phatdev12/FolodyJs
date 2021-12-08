@@ -16,8 +16,8 @@ module.exports.Render = class Render {
             if(elements === null) return
             // Options in this function
             this.addComps = (filename) => {
-                fs.readFile(__dirname + filename, 'utf-8' , function(error, data) {
-                    console.log(data)
+                fs.readFile("../example/components/App.fop", function(error, data) {
+                    elements.innerHTML = data
                 })
             }
         } catch(err){

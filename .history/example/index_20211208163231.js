@@ -1,4 +1,4 @@
-const { Render } = require("../main")
+const { Render } = require("folodyjs")
 const App = new Render()
 
 App.run("main")
